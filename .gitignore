@@ -24,3 +24,5 @@ hs_err_pid*
 /.idea/
 /test-output/
 *.iml
+build/
+target/
