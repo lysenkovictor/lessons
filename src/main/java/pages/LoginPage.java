@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LoginPage extends BasePage {
 
@@ -22,6 +23,12 @@ public class LoginPage extends BasePage {
         return new AccountPage();
     }
 
+
+    public void checkErrorMessage(String massageError) {
+        assertThat($(By.className("error-msg")).getText())
+                .describedAs("must have error message")
+                .contains(massageError);
+    }
 
 
 }

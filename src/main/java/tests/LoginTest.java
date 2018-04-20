@@ -7,13 +7,20 @@ import pages.LoginPage;
 
 public class LoginTest extends BaseTest{
 
-    @Test
+    private HomePage homePage = new HomePage();
+    private LoginPage loginPage = new LoginPage();
+
+    @Test()
     public void canLoginTest() {
-        HomePage homePage = new HomePage();
         homePage.clickButtonMyAccount();
-        LoginPage loginPage = new LoginPage();
         AccountPage accountPage = loginPage.logIn("viktorlsn@gmail.com", "P4r4zitTest");
         accountPage.initializationAccountPage();
+    }
 
+    @Test
+    public void сanSeeValidationError() {
+        homePage.clickButtonMyAccount();
+        loginPage.logIn("viktorlsn1@gmail.com", "P4r4zitTest");
+        loginPage.checkErrorMessage("Indirizzo e-mail o password non validi");
     }
 }
