@@ -1,10 +1,13 @@
 package tests;
 
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.AccountPage;
 import pages.HomePage;
 import pages.LoginPage;
+import listeners.ReportPortalOnFailListener;
 
+@Listeners({ReportPortalOnFailListener.class})
 public class LoginTest extends BaseTest{
 
     private HomePage homePage = new HomePage();
@@ -21,6 +24,8 @@ public class LoginTest extends BaseTest{
     public void сanSeeValidationError() {
         homePage.clickButtonMyAccount();
         loginPage.logIn("viktorlsn1@gmail.com", "P4r4zitTest");
-        loginPage.checkErrorMessage("Indirizzo e-mail o password non validi");
+        loginPage.checkErrorMessage("Indirizzo e-mail o password non2 validi");
+
+
     }
 }
