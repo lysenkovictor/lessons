@@ -48,6 +48,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>1.0.9</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.epam.reportportal</groupId>
             <artifactId>agent-java-testng</artifactId>
             <version>4.0.2</version>
