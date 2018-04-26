@@ -1,51 +1,21 @@
 package pages;
 
-import com.codeborne.selenide.SelenideElement;
-import entities.Menu;
-import org.openqa.selenium.By;
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
+import com.codeborne.selenide.Configuration;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static com.codeborne.selenide.Selenide.Wait;
+import static com.codeborne.selenide.Selenide.open;
 
-public abstract class   BasePage extends UtilsPage{
+public abstract class BasePage extends UtilsPage {
 
+    protected String baseUrl = Configuration.baseUrl;
 
-    SelenideElement
-            battonMyAccount = $(By.xpath("//a[contains(text(),'Mio account')]")),
-            buttonLogOut = $(By.xpath("//a[contains(text(),'Carrello Chiudi')]"));
-
-    public CatalogPage search(String stringSearch) {
-        $(By.id("ui-id-1")).setValue(stringSearch);
-        $(By.id("ui-id-2")).click();
-
-        return new CatalogPage();
+        public void openPage() {
+        open(baseUrl);
     }
 
-    public void goToByTopMenu(Menu menu) {
-        int sizeListMenu = menu.getListMenuRoad().size();
-        for (int i = 0; i < sizeListMenu; i++) {
-            SelenideElement searchElement = $(byText(menu.getListMenuRoad().get(i)));
-            searchElement.shouldBe(visible).hover();
-            if (sizeListMenu-1  == i)
-            {
-                searchElement.shouldBe(visible).click();
-            }
-        }
+        public void shouldBeOpenUrl() {
+        Wait().until(ExpectedConditions.urlContains(baseUrl));
     }
 
-    public BasketPage clickBattonBasket() {
-        $(By.xpath("//a[@class='basket-full']")).click();
-        return new BasketPage();
-    }
-
-    public void clickButtonMyAccount() {
-        battonMyAccount.click();
-    }
-
-    public void clickButtonLogOut() {
-        buttonLogOut.click();
-    }
 }
-
-

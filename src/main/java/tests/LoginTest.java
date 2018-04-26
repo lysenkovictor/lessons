@@ -1,40 +1,42 @@
 package tests;
 
+import entities.User;
+import listeners.ReportPortalOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import pages.AccountPage;
-import pages.HomePage;
+import pages.CustomerPage;
 import pages.LoginPage;
-import listeners.ReportPortalOnFailListener;
 import utils.I18n;
 
 @Listeners({ReportPortalOnFailListener.class})
-public class LoginTest extends BaseTest{
+public class LoginTest extends BaseTest {
 
 
-
-    @Test()
+    @Test(enabled = true)
     public void canLoginTest() {
-        HomePage homePage = new HomePage();
+        User user = User.builder().email(baseConfig.login()).password(baseConfig.password()).build();
         LoginPage loginPage = new LoginPage();
-        homePage.clickButtonMyAccount();
+        loginPage.openPage();
+        loginPage.shouldBeOpenUrl();
 
-        AccountPage accountPage = loginPage.logIn("viktorlsn@gmail.com", "P4r4zitTest");
-        accountPage.initializationAccountPage();
+        CustomerPage customerPage = loginPage.logIn(user);
+
+        customerPage.shouldBeOpenUrl();
     }
 
-    @Test
+    @Test(enabled = true)
     public void сanSeeValidationError() {
-        HomePage homePage = new HomePage();
-        LoginPage loginPage = new LoginPage();
-        homePage.clickButtonMyAccount();
-        loginPage.logIn("viktorlsn1@gmail.com", "P4r4zitTest");
-        loginPage.checkErrorMessage("Indirizzo e-mail o password non2 validi");
-    }
 
-    @Test
-    public void testTest() {
-        System.out.println(I18n.i18nInstance().massageErrorIncorrectLogin);
+        User user = User.builder().email(baseConfig.incorrectLogin()).password(baseConfig.incorrectPassword()).build();
+        LoginPage loginPage = new LoginPage();
+        loginPage.openPage();
+        loginPage.shouldBeOpenUrl();
+
+        loginPage.logIn(user);
+
+        loginPage.checkErrorMessageEmail(I18n.i18nInstance().massageErrorIncorrectLogin);
+        loginPage.checkErrorMessagePassword(I18n.i18nInstance().massageErrorIncorrectPassword);
+
     }
 
 }

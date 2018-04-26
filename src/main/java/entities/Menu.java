@@ -1,8 +1,12 @@
 package entities;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Data
 public class Menu {
     private List<String> listNameLinkMenu = new ArrayList<String>();
 
@@ -11,9 +15,9 @@ public class Menu {
         return listNameLinkMenu;
     }
 
-    public List<String> getListMenuRoad() {
+    public List<String> getListMenuPath() {
         if (listNameLinkMenu.size() == 0) {
-            throw new RuntimeException("Не заполене");
+            throw new RuntimeException("Size menu 0");
         }
         return listNameLinkMenu;
     }
