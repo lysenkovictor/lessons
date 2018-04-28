@@ -23,7 +23,7 @@ public class HeaderPage {
         int sizeListMenu = menu.getListMenuPath().size();
         for (int i = 0; i < sizeListMenu; i++) {
             SelenideElement searchElement = $(byText(menu.getListMenuPath().get(i)));
-            searchElement.shouldBe(visible,enabled).hover().click();
+            searchElement.shouldBe(visible, enabled).hover().click();
         }
     }
 

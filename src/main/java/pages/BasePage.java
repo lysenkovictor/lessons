@@ -10,11 +10,11 @@ public abstract class BasePage extends UtilsPage {
 
     protected String baseUrl = Configuration.baseUrl;
 
-        public void openPage() {
+    public void openPage() {
         open(baseUrl);
     }
 
-        public void shouldBeOpenUrl() {
+    public void shouldBeOpenUrl() {
         Wait().until(ExpectedConditions.urlContains(baseUrl));
     }
 

@@ -12,19 +12,7 @@ import utils.I18n;
 public class LoginTest extends BaseTest {
 
 
-    @Test(enabled = true)
-    public void canLoginTest() {
-        User user = User.builder().email(baseConfig.login()).password(baseConfig.password()).build();
-        LoginPage loginPage = new LoginPage();
-        loginPage.openPage();
-        loginPage.shouldBeOpenUrl();
-
-        CustomerPage customerPage = loginPage.logIn(user);
-
-        customerPage.shouldBeOpenUrl();
-    }
-
-    @Test(enabled = true)
+    @Test(enabled = true, priority = 0)
     public void сanSeeValidationError() {
 
         User user = User.builder().email(baseConfig.incorrectLogin()).password(baseConfig.incorrectPassword()).build();
@@ -37,6 +25,18 @@ public class LoginTest extends BaseTest {
         loginPage.checkErrorMessageEmail(I18n.i18nInstance().massageErrorIncorrectLogin);
         loginPage.checkErrorMessagePassword(I18n.i18nInstance().massageErrorIncorrectPassword);
 
+    }
+
+    @Test(enabled = true, priority = 1)
+    public void canLoginTest() {
+        User user = User.builder().email(baseConfig.login()).password(baseConfig.password()).build();
+        LoginPage loginPage = new LoginPage();
+        loginPage.openPage();
+        loginPage.shouldBeOpenUrl();
+
+        CustomerPage customerPage = loginPage.logIn(user);
+
+        customerPage.shouldBeOpenUrl();
     }
 
 }

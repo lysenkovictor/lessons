@@ -2,19 +2,20 @@ package pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
+
 import java.util.NoSuchElementException;
+
 import static com.codeborne.selenide.Selenide.$$;
 
 
 public class HomePage extends BasePage {
 
     private HeaderPage headerPage = new HeaderPage();
+    private ElementsCollection bannerList = $$(By.xpath("//ul[@id='brands']/li"));
 
     public HeaderPage getHeaderPage() {
         return headerPage;
     }
-
-    private ElementsCollection bannerList = $$(By.xpath("//ul[@id='brands']/li"));
 
     public CatalogPage chooseBannerWithProductBy(int idInCollection, int countExpected) {
         bannerList.shouldHaveSize(countExpected);
